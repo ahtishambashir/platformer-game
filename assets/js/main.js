@@ -64,11 +64,13 @@ const animate = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   player.update();
 
-
   if (keys.rightKey.pressed && player.position.x < proportionalSize(400)) {
     player.velocity.x = 5;
+  } else if (keys.leftKey.pressed && player.position.x > proportionalSize(100)) {
+    player.velocity.x = -5;
+  } else {
+    player.velocity.x = 0;
   }
-
 }
 
 
@@ -80,6 +82,18 @@ const keys = {
     pressed: false
   }
 };
+
+const movePlayer = (key, xVelocity, isPressed) => {
+  if (!isCheckpointCollisionDetectionActive) {
+    player.velocity.x = 0;
+    player.velocity.y = 0;
+    return;
+  }
+
+
+
+}
+
 
 const startGame = () => {
   canvas.style.display = "block";
