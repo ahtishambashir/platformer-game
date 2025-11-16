@@ -194,7 +194,6 @@ const animate = () => {
     };
   });
 
-
   checkpoints.forEach((checkpoint, index, checkpoints) => {
     const checkpointDetectionRules = [
       player.position.x >= checkpoint.position.x,
@@ -207,9 +206,21 @@ const animate = () => {
       index === 0 || checkpoints[index - 1].claimed === true,
     ];
 
-  });
+    if (checkpointDetectionRules.every((rule) => rule)) {
+      checkpoint.claim();
 
+
+      if (index === checkpoints.length - 1) {
+        isCheckpointCollisionDetectionActive = false;
+        showCheckpointScreen("You reached the final checkpoint!");
+        movePlayer("ArrowRight", 0, false)
+      };
+
+
+    };
+  });
 }
+
 
 const keys = {
   rightKey: {
