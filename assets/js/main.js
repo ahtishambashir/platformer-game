@@ -94,7 +94,6 @@ class CheckPoint {
   }
 };
 
-
 const player = new Player();
 
 const platformPositions = [
@@ -115,8 +114,6 @@ const platformPositions = [
 const platforms = platformPositions.map(
   (platform) => new Platform(platform.x, platform.y)
 );
-
-
 
 const checkpointPositions = [
   { x: 1170, y: proportionalSize(80), z: 1 },
@@ -163,7 +160,9 @@ const animate = () => {
         platform.position.x += 5;
       });
 
-
+      checkpoints.forEach((checkpoint) => {
+        checkpoint.position.x += 5;
+      });
     }
   }
 
@@ -240,6 +239,12 @@ const startGame = () => {
   startScreen.style.display = "none";
   animate();
 }
+
+
+const showCheckpointScreen = (msg) => {
+  checkpointScreen.style.display = "block";
+};
+
 
 startBtn.addEventListener("click", startGame);
 
